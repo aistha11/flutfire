@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutfire/getx_app/controllers/firebaseAuthController.dart';
+import 'package:flutfire/getx_app/controllers/profileController.dart';
+import 'package:flutfire/getx_app/widgets/myDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,26 +9,17 @@ import 'home_controller.dart';
 class HomeView extends GetResponsiveView<HomeController> {
   HomeView() : super(alwaysUseBuilder: false);
 
+   final ProfileController userController = Get.put(ProfileController());
+  
   @override
   Widget? phone() {
     return SafeArea(
       child: Scaffold(
-         appBar: AppBar(
+        appBar: AppBar(
           title: Text("Memories"),
+          actions: [],
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              ListTile(
-                title: Text("Sign Out"),
-                leading: Icon(Icons.logout),
-                onTap: (){
-                  Get.find<FirebaseAuthController>().signOut();
-                }
-              )
-            ],
-          ),
-        ),
+        drawer: MyDrawer(),
         body: MemoriesList(),
       ),
     );
@@ -35,7 +27,7 @@ class HomeView extends GetResponsiveView<HomeController> {
 
   @override
   Widget? tablet() {
-   return SafeArea(
+    return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text("Memories"),
@@ -108,7 +100,6 @@ class MemoriesList extends StatelessWidget {
                       ),
                     ),
                     Text(title),
-
                   ],
                 ),
               );
@@ -119,3 +110,4 @@ class MemoriesList extends StatelessWidget {
     );
   }
 }
+

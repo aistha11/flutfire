@@ -1,5 +1,4 @@
 import 'package:flutfire/getx_app/controllers/firebaseAuthController.dart';
-import 'package:flutfire/getx_app/pages/auth/phoneAuth_view.dart';
 import 'package:flutfire/getx_app/pages/auth/widgets/authHeader.dart';
 import 'package:flutfire/getx_app/pages/auth/widgets/authTextFormField.dart';
 import 'package:flutter/gestures.dart';

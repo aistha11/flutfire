@@ -28,7 +28,7 @@ class FirebaseService {
   }
 
   /// Get stream of db user by id
-  static Stream<DbUser?> streamDbUserById(String id) {
+  static Stream<DbUser> streamDbUserById(String id) {
     final refUser = usersColsRefs.doc(id).snapshots();
 
     return refUser.map((doc) {
@@ -40,6 +40,11 @@ class FirebaseService {
   static Future<DbUser> getDbUserById(String id) async {
     DocumentSnapshot<DbUser> userSnap = await usersColsRefs.doc(id).get();
     return userSnap.data()!;
+  }
+
+  /// Update db User
+  static Future<void> updateProfile(DbUser user)async{
+    return await usersColsRefs.doc(user.username).set(user, SetOptions(merge: true));
   }
 
   

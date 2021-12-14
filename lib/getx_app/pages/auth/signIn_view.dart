@@ -67,6 +67,7 @@ class SignInView extends StatelessWidget {
                     style: TextStyle(color: Colors.red),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
+                        // Get.to(ForgotPasswordView());
                         Get.to(() => ForgotPasswordView());
                       },
                   ),

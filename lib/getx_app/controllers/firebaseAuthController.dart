@@ -17,7 +17,7 @@ class FirebaseAuthController extends GetxController {
 
   Status get status => _status.value;
 
-  User? get user => _firebaseUser!.value;
+  User? get user => _auth.currentUser;
 
   @override
   void onInit() {
@@ -48,7 +48,7 @@ class FirebaseAuthController extends GetxController {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then(
-        (UserCredential uCreds) {
+        (UserCredential uCreds) async {
           DbUser dbuser = DbUser(
             id: uCreds.user!.uid,
             name: name,
@@ -56,7 +56,7 @@ class FirebaseAuthController extends GetxController {
             email: uCreds.user!.email.toString(),
             username: username,
           );
-          FirebaseService.createDbUserById(dbuser);
+          await FirebaseService.createDbUserById(dbuser);
           signIn(email, password);
         },
       );
@@ -159,8 +159,16 @@ class FirebaseAuthController extends GetxController {
 
       // Once signed in, return the UserCredential
       await FirebaseAuth.instance.signInWithCredential(credential).then(
-        (uCreds) {
-          print(uCreds);
+        (uCreds) async{
+          
+          DbUser dbuser = DbUser(
+            id: uCreds.user!.uid,
+            name: uCreds.user!.displayName.toString(),
+            profilePhoto: uCreds.user!.photoURL.toString(),
+            email: uCreds.user!.email.toString(),
+            username: uCreds.user!.email!.split('@')[0],
+          );
+          await FirebaseService.createDbUserById(dbuser);
           _status.value = Status.AUTHENTICATED;
         },
       );
