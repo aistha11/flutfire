@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage; 
 
 class EditProfileView extends StatefulWidget {
   const EditProfileView({Key? key}) : super(key: key);
@@ -25,6 +25,10 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   TextEditingController name = TextEditingController();
   TextEditingController number = TextEditingController();
+
+
+  var uploading = false;
+  
 
   dynamic _pickImageError;
 
@@ -43,6 +47,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     super.initState();
   }
 
+
   void _chooseImage(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(
@@ -50,6 +55,7 @@ class _EditProfileViewState extends State<EditProfileView> {
       );
       setState(() {
         _imageFile = pickedFile;
+        
       });
     } catch (e) {
       setState(() {
@@ -155,6 +161,7 @@ class _EditProfileViewState extends State<EditProfileView> {
         username: Get.find<ProfileController>().dbUser.value.username,
         profilePhoto: imgUrl,
         email: Get.find<ProfileController>().dbUser.value.email,
+        deviceToken: Get.find<ProfileController>().dbUser.value.deviceToken,
       );
       await FirebaseService.updateProfile(dbUser);
     } catch (e) {

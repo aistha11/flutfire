@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
 
+  
+
+
   Rx<DbUser> dbUser = Rx<DbUser>(
     DbUser(
       name: "No Name",
@@ -13,6 +16,7 @@ class ProfileController extends GetxController {
       number: null,
       profilePhoto: "",
       email: "nomail@gmail.com",
+      deviceToken: "",
     ),
   );
 
@@ -26,6 +30,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     String username = Utils.getUsername(Get.find<FirebaseAuthController>().user!.email!);
+    
     getDbUser(username);
     super.onInit();
   }

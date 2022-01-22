@@ -14,7 +14,7 @@ class Wrapper extends GetView<FirebaseAuthController> {
       if (controller.status == Status.AUTHENTICATED) {
         return HomeView();
       } else {
-        return AuthView();
+        return AuthView(); 
       }
     });
   }

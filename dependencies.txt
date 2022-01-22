@@ -1,0 +1,1 @@
+cached_network_image, cloud_firestore, cupertino_icons, firebase_auth, firebase_core, firebase_messaging, firebase_storage, font_awesome_flutter, get, google_sign_in, image_picker, otp_text_field, provider, flutter_local_notifications

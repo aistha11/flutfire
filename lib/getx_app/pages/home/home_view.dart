@@ -73,7 +73,11 @@ class MemoriesList extends StatelessWidget {
             return Text("Loading");
           }
 
-          print(snapshot.data!.docs[0]['title'].toString());
+          if(snapshot.data!.docs.isEmpty){
+            return Text("No Data");
+          }
+
+          // print(snapshot.data!.docs[0]['title'].toString());
 
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,

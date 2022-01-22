@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutfire/getx_app/models/dbUser.dart';
+import 'package:flutfire/getx_app/services/fireFcmService.dart';
 import 'package:flutfire/getx_app/services/firebaseService.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class FirebaseAuthController extends GetxController {
 
   Status get status => _status.value;
 
-  User? get user => _auth.currentUser;
+  User? get user => _auth.currentUser; 
 
   @override
   void onInit() {
@@ -54,6 +55,7 @@ class FirebaseAuthController extends GetxController {
             name: name,
             profilePhoto: "",
             email: uCreds.user!.email.toString(),
+            deviceToken: await FireFcmService.getDeviceToken(),
             username: username,
           );
           await FirebaseService.createDbUserById(dbuser);
@@ -166,6 +168,7 @@ class FirebaseAuthController extends GetxController {
             name: uCreds.user!.displayName.toString(),
             profilePhoto: uCreds.user!.photoURL.toString(),
             email: uCreds.user!.email.toString(),
+            deviceToken: await FireFcmService.getDeviceToken(),
             username: uCreds.user!.email!.split('@')[0],
           );
           await FirebaseService.createDbUserById(dbuser);

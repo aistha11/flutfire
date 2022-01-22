@@ -15,6 +15,7 @@ class DbUser {
     required this.username,
     required this.profilePhoto,
     required this.email,
+    required this.deviceToken,
     this.number,
   });
 
@@ -23,6 +24,7 @@ class DbUser {
   final String username;
   final String profilePhoto;
   final String email;
+  final String deviceToken;
   final int? number;
 
   
@@ -34,6 +36,7 @@ class DbUser {
       'username': username,
       'profilePhoto': profilePhoto,
       'email': email,
+      'deviceToken': deviceToken,
       'number': number,
     };
   }
@@ -45,6 +48,7 @@ class DbUser {
       username: map['username'],
       profilePhoto: map['profilePhoto'],
       email: map['email'],
+      deviceToken: map['deviceToken'],
       number: map['number'],
     );
   }
